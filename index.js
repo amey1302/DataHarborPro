@@ -41,7 +41,7 @@ app.use(authRoutes);
 
 // Parse incoming request bodies
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(bodyParser.json());
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
