@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const AdminModel = require('../model/admin-model');
+const AdminModel = require('./model/admin-model');
 
 const router = express.Router();
 
