@@ -4,12 +4,13 @@ const mongoose = require('mongoose');
 const AdminModel = require('../model/admin-model');
 
 const router = express.Router();
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const admin = await AdminModel.findOne({ username, password }).maxTimeMS(2000000);
+    const admin = await AdminModel.findOne({ username, password });
 
     if (admin) {
       req.session.adminUser = {
