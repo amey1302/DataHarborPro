@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Harbor Pro</title>
+    <!-- Add your CSS links here -->
+	<link href="/backend/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/backend/css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="/backend/css/admin-style.css" />
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+    <style>
+        .main-container {
+          padding: 30px;
+        }
+
+        .table-container {
+          margin-top: 30px;
+          overflow-x: auto; /* Enable horizontal scrolling */
+          width: 100%; /* Set the width to 100% */
+        }
+        #searchInput {
+          padding: 10px;
+          width: 300px;
+          margin-bottom: 5px;
+          border: 2px solid #007bff;
+          border-radius: 20px;
+          font-size: 16px;
+          outline: #de5b10;
+        }
+
+        #searchInput:focus {
+          border-color: #de5b10;
+        }
+
+        /* Style for the search button */
+        #searchButton {
+          padding: 10px 20px;
+          background-color: #d5e0ec;
+          color: #fff;
+          border: none;
+          border-radius: 20px;
+          font-size: 16px;
+          cursor: pointer;
+          outline: none;
+          transition: background-color 0.3s;
+        }
+
+        #searchButton:hover {
+          background-color: #0056b3;
+        }
+
+        table {
+          table-layout: fixed; /* Set the table layout to fixed */
+          width: 100%; /* Set the width to 100% */
+          border-bottom: 1px solid #0a1a2b;
+        }
+
+        th:nth-child(1) {
+          width: 50%; /* Set the width of the first column to 50% */
+        }
+        th:nth-child(2) {
+          width: 10%; /* Set the width of the first column to 50% */
+        }
+        th:nth-child(3) {
+          width: 10%; /* Set the width of the first column to 50% */
+        }
+
+        th,
+        td {
+          border-bottom: 1px solid #0a1a2b;
+          padding: 10px; /* Add padding to cells */
+        }
+
+        tr {
+          border-bottom: 1px solid #0a1a2b;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .logout-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: transparent;
+            margin-top: 10px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .logout-link:hover {
+            color: #007bff;
+            background-color: #fff;
+            border-color: #007bff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+      </style>
+</head>
+<body>
+  <header>
+    <a href="/admin-home"><img class="logo" src="/images/Data-harbor-pro-high-resolution-logo-black-transparent.png" alt="Logo" /></a>
+    <h1 class="company-name">Data Harbor Pro</h1>
+    <a class="logout-link" href="/logout">Logout</a>
+</header>
+
+    <div class="main-container">
+        <div class="container">
+            <% if (events.length > 0) { %>
+            <h1>Events for <%= activityDetails %></h1>
+            <div class="table-container">
+                <table id="eventTable">
+                    <thead>
+                        <tr><th>Name of Event</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% events.forEach(event => { %>
+                        <tr>
+
+                            <td><%= event.nameOfActivity %></td>
+                            <td><%= event.activityDetails %></td>
+                            <td><%= event.startDateOfActivityHeld %></td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <% } else { %>
+            <p>No events found for <%= activityDetails %>.</p>
+            <% } %>
+        </div>
+    </div>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+    <!-- Add your script links here -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#eventTable").DataTable({
+                lengthMenu: [10, 25, 50, 75, 100], // Define the options for number of entries per page
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Harbor Pro</title>
+    <!-- Bootstrap CSS -->
+    <link href="/backend/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="/backend/css/bootstrap-icons.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/backend/css/admin-style.css" />
+    <!-- DataTables CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"
+    />
+    <!-- Add your CSS or external stylesheets here -->
+    <style>
+      /* Custom Styles */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        overflow-x: hidden;
+        margin-top: 70px;
+      }
+
+      header {
+        background-color: #007bff;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        width: 80px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .company-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .logout-link {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        transition: color 0.3s ease;
+        border: 2px solid transparent;
+        padding: 8px 16px;
+        border-radius: 5px;
+        background-color: transparent;
+        margin-top: 10px;
+        display: inline-block;
+        text-transform: uppercase;
+      }
+
+      .logout-link:hover {
+        color: #007bff;
+        background-color: #fff;
+        border-color: #007bff;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      header a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #007bff;
+      }
+
+      .card-text {
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .event-image {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .card-body {
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <a href="/admin-home"
+        ><img
+          class="logo"
+          src="/images/Data-harbor-pro-high-resolution-logo-black-transparent.png"
+          alt="Logo"
+      /></a>
+      <h1 class="company-name">Data Harbor Pro</h1>
+      <a class="logout-link" href="/logout">Logout</a>
+    </header>
+    <div class="container">
+      <div class="card">
+        <div class="card-body" style="justify-content: center">
+          <div class="row" style="justify-content: center">
+            <div
+              class="row"
+              style="justify-content: center; align-items: center"
+            >
+              <div class="col-md-5" style="justify-content: center">
+                <div class="event-image-container">
+                  <img
+                    src="/flyer/<%= event.flyer %>"
+                    alt="Event Flyer"
+                    class="event-image"
+                  />
+                </div>
+              </div>
+              <div class="col-md-5">
+                <% if (event.eventCategory) { %>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Event Category</h5>
+                    <p class="card-text event-category">
+                      <%= event.eventCategory %>
+                    </p>
+                  </div>
+                </div>
+                <% } %> <% if (event.eventName) { %>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Event Name</h5>
+                    <p class="card-text event-name"><%= event.eventName %></p>
+                  </div>
+                </div>
+                <% } %> <% if (event.eventDate) { %>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Event Date</h5>
+                    <p class="card-text event-name"><%= event.eventDate %></p>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+
+            <div class="col-md-10">
+              <% if (event.guideLines) { %>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Guidelines</h5>
+                  <p class="card-text event-guidelines">
+                    <%- event.guideLines %>
+                  </p>
+                </div>
+              </div>
+              <% } %> <% if (event.eventRules) { %>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Event Rules</h5>
+                  <p class="card-text event-rules"><%- event.eventRules %></p>
+                </div>
+              </div>
+              <% } %>
+            </div>
+
+            <div
+              class="row"
+              style="justify-content: center; align-items: center"
+            >
+              <div class="col-md-5">
+                <% if (event.departmentalCoordinators) { %>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Departmental Coordinators</h5>
+                    <p class="card-text department-coordinators">
+                      <%= event.departmentalCoordinators %>
+                    </p>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+              <div class="col-md-5">
+                <% if (event.eventCoordinators) { %>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Event Coordinators</h5>
+                    <p class="card-text event-coordinators">
+                      <%= event.eventCoordinators %>
+                    </p>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+            <div
+              class="row"
+              style="justify-content: center; align-items: center"
+            >
+              <div class="col-md-5">
+                <% if (event.venue) { %>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Venue</h5>
+                    <p class="card-text event-venue"><%= event.venue %></p>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+              <div class="col-md-5">
+                <% if (event.location) { %>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Location</h5>
+                    <p class="card-text event-location">
+                      <%= event.location %>
+                    </p>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+            <div
+              class="row"
+              style="justify-content: center; align-items: center"
+            >
+              <div class="col-md-10">
+                <% if (event.registrationLink) { %>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Registration Link</h5>
+                    <p class="card-text">
+                      <a
+                        href="<%= event.registrationLink %>"
+                        class="registration-link"
+                        ><%= event.registrationLink %></a
+                      >
+                    </p>
+                    <button onclick="toggleForm()" class="link button">
+                      Click here to see form
+                    </button>
+
+                    <div id="registration-form-container" style="display: none">
+                      <iframe
+                        src="<%= event.registrationLink %>"
+                        width="100%"
+                        height="500px"
+                        style="border: none"
+                      ></iframe>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        function toggleForm() {
+          console.log("Button clicked"); // Add this line
+          var formContainer = document.getElementById(
+            "registration-form-container"
+          );
+          if (
+            formContainer.style.display === "none" ||
+            formContainer.style.display === ""
+          ) {
+            formContainer.style.display = "block";
+          } else {
+            formContainer.style.display = "none";
+          }
+        }
+      </script>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="/backend/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"
+    ></script>
+    <!-- Add your JavaScript here -->
+  </body>
+</html>

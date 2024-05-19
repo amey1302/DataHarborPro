@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Table</title>
+    <!-- Add any necessary stylesheets or scripts here -->
+    <style>
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .logout-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: transparent;
+            margin-top: 10px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .logout-link:hover {
+            color: #007bff;
+            background-color: #fff;
+            border-color: #007bff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Data Table</h1>
+    <table border="1" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Academic Year</th>
+                <th>Sr. No.</th>
+                <th>Name of Program / Topic Name / Subject Etc.</th>
+                <th>Resource Person Name</th>
+                <th>Resource Person Organization Name</th>
+                <th>Duration (Hrs/Day)</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>No. of Participants</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% let academicYears = []; %>
+            <% data.forEach((item) => { %>
+                <% if (!academicYears.includes(item.academicYear)) { %>
+                    <% academicYears.push(item.academicYear); %>
+                    <% let filteredData = data.filter((dataItem) => dataItem.academicYear === item.academicYear); %>
+                    <% filteredData.forEach((filteredItem, index) => { %>
+                        <tr>
+                            <% if (index === 0) { %>
+                                <td rowspan="<%= filteredData.length %>" style="text-align: center;"><%= filteredItem.academicYear %></td>
+                            <% } %>
+                            <td style="text-align: center;"><%= index + 1 %></td>
+                            <td style="text-align: center;"><%= filteredItem.nameOfActivity %></td>
+                            <td style="text-align: center;"><%= filteredItem.resourcePerson %></td>
+                            <td style="text-align: center;"><%= filteredItem.detailsOfResourcePerson %></td>
+                            <td style="text-align: center;"><%= filteredItem.noOfDays %></td>
+                            <td style="text-align: center;"><%= filteredItem.startDateOfActivityHeld %></td>
+                            <td style="text-align: center;"><%= filteredItem.endDateOfActivityHeld %></td>
+                            <td style="text-align: center;"><%= filteredItem.noOfStudents %></td>
+                        </tr>
+                    <% }); %>
+                <% } %>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+
+<!-- <% // Helper function to get row count for rowspan %>
+<% function getRowCount(data, academicYear) { %>
+    <% let count = 0; %>
+    <% data.forEach((item) => { %>
+        <% if (item.academicYear === academicYear) { %>
+            <% count++; %>
+        <% } %>
+    <% }); %>
+    <% return count; %>
+<% } %> -->
+
+</html>

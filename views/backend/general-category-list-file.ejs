@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/backend/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/backend/css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="/backend/css/admin-style.css" />
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+    <title>Data Harbor Pro</title>
+    <!-- Add your CSS links here -->
+    <style>
+        .main-container {
+            padding: 30px;
+        }
+
+        .table-container {
+            margin-top: 30px;
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        table {
+            table-layout: fixed;
+            width: 100%;
+            border-bottom: 1px solid #0a1a2b;
+        }
+
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 50%;
+            border-right: 1px solid #0a1a2b;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 25%;
+            border-right: 1px solid #0a1a2b;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 25%;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #0a1a2b;
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr {
+            border-bottom: 1px solid #0a1a2b;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .logout-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: transparent;
+            margin-top: 10px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .logout-link:hover {
+            color: #007bff;
+            background-color: #fff;
+            border-color: #007bff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/admin-home"><img class="logo" src="/images/Data-harbor-pro-high-resolution-logo-black-transparent.png" alt="Logo" /></a>
+        <h1 class="company-name">Data Harbor Pro</h1>
+        <a class="logout-link" href="/login">Login</a>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <% if (events.length > 0) { %>
+            <h1>Events for <%= activityDetails %></h1>
+            <div class="table-container">
+                <table id="searchTable">
+                    <thead>
+                        <tr>
+                            <th>Name of Activity</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% events.forEach(event => { %>
+                        <tr>
+                            <td><%= event.nameOfActivity %></td>
+                            <td><%= event.startDateOfActivityHeld %></td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <% } else { %>
+            <p>No events found for <%= activityDetails %>.</p>
+            <% } %>
+        </div>
+    </div>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+    <!-- Add your script links here -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $("#searchTable").DataTable({
+            lengthMenu: [10, 25, 50, 75, 100], // Define the options for number of entries per page
+        });
+
+        // Function to handle search when the enter key is pressed
+        document
+            .getElementById("searchInput")
+            .addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); // Prevent form submission
+                    const searchTerm = document
+                        .getElementById("searchInput")
+                        .value.trim();
+                    window.location.href = `/admin-home/search-event?searchTerm=${searchTerm}`;
+                }
+            });
+    });
+</script>
+
+</body>
+</html>

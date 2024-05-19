@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/backend/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/backend/css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="/backend/css/admin-style.css" />
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+    <title>Data Harbor Pro</title>
+
+    <style>
+        body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #DDFFBB; /* Light gray */
+    color: #333; /* Dark gray for text */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .logout-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: transparent;
+            margin-top: 10px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .logout-link:hover {
+            color: #007bff;
+            background-color: #fff;
+            border-color: #007bff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+	background: #DDFFBB;
+}
+
+section {
+    margin: 1em;
+    padding: 1em;
+    background: #fff; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.total-count-container,
+.activity-wise-container {
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    background: #f8f9fa; /* Light gray */
+    justify-content: space-around;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.total-count-container,
+.activity-wise-container {
+	background-color:#DDFFBB ;
+}
+.dashboard-item {
+    width: 21vw; /* Adjusted width for better responsiveness */
+    margin-left: 1em;
+    margin-right: 1em;
+    background: #DDFFBB; /* White background */
+    border-radius: 8px;
+    box-shadow: 10px0 10px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    animation: fadeIn 1s ease-out;
+    position: relative;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-20px);
+    }
+
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+.count-circle {
+    width: 22vw; /* Adjusted width for better responsiveness */
+    padding-bottom: 100%;
+    position: relative;
+    border-radius: 50%;
+    background: linear-gradient(75deg, #007bff, #00bfff, #1e90ff);
+    animation: pulse 2s infinite, bounce 2s infinite;
+    transition: opacity 0.8s ease;
+    opacity: 0.8;
+    overflow: hidden;
+    animation-delay: <%=Math.random() * 2 + "s" %>;
+}
+
+.count-circle:hover {
+    opacity: 1;
+}
+
+.count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.icon {
+    max-width: 45%;
+    height: auto;
+    margin-top: 1px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    mix-blend-mode: multiply;
+    overflow: hidden;
+    background: transparent;
+}
+
+.count-number {
+    font-size: 4vw;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+    animation: twinkling-glow 2s ease-in-out infinite;
+}
+
+.category-name {
+    font-size: 2vw;
+    color: #fff;
+}
+
+@keyframes twinkling-glow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(207, 19, 19, 0.9), 0 0 30px rgba(255, 255, 255, 0.5);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 0, 255, 0.7);
+    }
+
+    100% {
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+    }
+}
+
+.card-container {
+    background-color: #f8f9fa; /* Warm Orange */
+color: #feb47b; /* Beige */ /* Light gray */
+    justify-content: center;
+    padding: 5px;
+}
+
+.card-container .cardi {
+    align-items: center;
+    position: relative;
+    border-radius: 100%;
+    flex: 0 0 180px;
+    max-width: 50%;
+    max-height: 50%;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-container .cardi::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b, #ffcb90);
+    border-radius: 100%;
+    z-index: -1;
+}
+
+.cardi button {
+    width: fit-content;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff; /* Dark blue */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-size-adjust: initial;
+    transition: background-color 0.3s;
+}
+
+.cardi img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.event-container {
+    width: 100%;
+    /* Soft Green and Cream */
+background-color: #93d8be; /* Soft Green */
+color: #070a0c; /* Dark Gray */ /* Light gray */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-card {
+    width: 20%;
+    min-width: 200px;
+    max-width: 300px;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.event-card .img-container {
+    height: 150px;
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.event-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.event-card .event-details {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-card .event-status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: white;
+}
+
+.upcoming {
+    background-color: rgba(0, 123, 255, 0.5); /* Transparent blue */
+}
+
+.ongoing {
+    background-color: rgba(40, 167, 69, 0.5); /* Transparent green */
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="/admin-home"><img class="logo" src="/images/Data-harbor-pro-high-resolution-logo-black-transparent.png" alt="Logo" /></a>
+        <h1 class="company-name">Data Harbor Pro</h1>
+        <a class="logout-link" href="/logout">Logout</a>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="card-container">
+                <div class="cardi">
+                    <a href="/admin-home/adddata"><img src="/images/add-event-high-resolution-logo-transparent.png"
+                            alt="Image 1" /></a>
+                </div>
+
+                <div class="cardi">
+                    <a href="/admin-home/search-event"><img
+                            src="/images/search-event-high-resolution-logo-transparent.png" alt="Image 1" /></a>
+                </div>
+
+                <div class="cardi">
+                    <a href="/admin-home/host-event"><img src="/images/host-event-high-resolution-logo-transparent.png"
+                            alt="Image 1" /></a>
+                </div>
+            </div>
+            <!-- Add a new section for displaying events -->
+            <h1>Upcoming Events</h1>
+            <div class="event-container">
+                <% const currentDate = new Date(); %>
+
+                <% const upcomingEvents = hostingEvents.filter(event => new Date(event.eventDate) >= currentDate); %>
+
+                <% if (upcomingEvents.length === 0) { %>
+                  <h3>No upcoming events</h3>
+                <% } else { %>
+                  <% upcomingEvents.forEach(event => {
+                      let eventStatus = "Upcoming";
+                      if (new Date(event.eventDate) < currentDate) {
+                          eventStatus = "Ongoing";
+                      }
+                  %>
+                  <div class="event-card">
+                      <div class="img-container">
+                          <img src="/flyer/<%= event.flyer %>" alt="Activity Image" />
+                      </div>
+                      <div>
+                          <h2><%= event._id %></h2>
+                          <p><strong>Date:</strong> <%= event.eventDate %></p>
+                          <p><strong>Location:</strong> <%= event.location %></p>
+                      </div>
+                      <!-- Display event status based on conditions -->
+                      <div class="event-status <%= eventStatus.toLowerCase() %>">
+                          <%= eventStatus %>
+                      </div>
+                  </div>
+                  <% }); %>
+                <% } %>
+              </div>
+
+
+            <h1>All Events</h1>
+            <section>
+                <h1>Category-wise Event Counts</h1>
+                <div class="activity-wise-container">
+                    <% categoryCounts.forEach(category=> { %>
+                    <div class="dashboard-item category-count">
+                        <a href="/admin-home/category-list/<%= encodeURIComponent(category._id)  %>">
+                            <div class="count-circle" style="background: linear-gradient(
+                                                        45deg,
+                                                        <%= getRandomColor() %>,
+                                                        <%= getRandomColor() %>,
+                                                        <%= getRandomColor() %>);">
+                                <div class="border-circle">
+                                    <div class="count">
+                                        <div class="icon">
+                                            <!-- Adjust the image source if needed -->
+                                        </div>
+                                        <div class="count-number">
+                                            <%= category.count %>
+                                        </div>
+                                        <div class="category-name">
+                                            <%= category._id %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <% }); %>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Add any JavaScript code here if needed
+    </script>
+</body>
+
+</html>

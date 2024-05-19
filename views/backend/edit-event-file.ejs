@@ -1,0 +1,450 @@
+<!-- views/backend/edit-event.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/backend/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/backend/css/bootstrap-icons.css" />
+	<link rel="stylesheet" href="/backend/css/admin-style.css" />
+	<title>Data Harbor Pro</title>
+	<style>
+		/* Additional CSS for improved UI */
+		body {
+			background-color: #f8f9fa;
+		}
+
+		.main-container {
+			margin-top: 50px;
+		}
+
+		.container {
+			background-color: #fff;
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.form-label {
+			font-weight: bold;
+		}
+
+		.form-control {
+			border-radius: 5px;
+		}
+
+		.btn-primary {
+			background-color: #007bff;
+			border-color: #007bff;
+		}
+
+		.btn-primary:hover {
+			background-color: #0056b3;
+			border-color: #0056b3;
+		}
+		header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .logout-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: transparent;
+            margin-top: 10px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .logout-link:hover {
+            color: #007bff;
+            background-color: #fff;
+            border-color: #007bff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+	</style>
+</head>
+
+<body>
+	<header>
+        <a href="/admin-home"><img class="logo" src="/images/Data-harbor-pro-high-resolution-logo-black-transparent.png" alt="Logo" /></a>
+        <h1 class="company-name">Data Harbor Pro</h1>
+        <a class="logout-link" href="/logout">Logout</a>
+    </header>
+	<div class="main-container">
+		<div class="container">
+			<h1
+				class="mb-4">
+				Edit
+				Event
+			</h1>
+			<form id="editEventForm" action="/admin-home/search-event/edit-event/<%= event._id %>"
+				method="POST">
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5   align-items-center">
+						<label
+							class="form-label">Activity
+							Details</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" id="activityDetails" name="activityDetails"
+							value="<%= event.activityDetails %>"
+							class="form-control"
+							readonly>
+					</div>
+				</div>
+
+				<!-- Add other input fields for event details here -->
+
+				<!-- Name of Activity -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">Name
+							of
+							Activity</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" name="nameOfActivity" value="<%= event.nameOfActivity %>"
+							class="form-control"
+							placeholder="Name of Activity">
+					</div>
+				</div>
+
+				<!-- Start Date of Activity Held -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">Start
+							Date
+							of
+							Activity
+							held</label>
+					</div>
+					<div
+						class="col">
+						<input type="date" name="startDateOfActivityHeld"
+							value="<%= event.startDateOfActivityHeld %>"
+							class="form-control"
+							placeholder="Start Date of Activity Held">
+					</div>
+				</div>
+
+				<!-- End Date of Activity Held -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">End
+							Date
+							of
+							Activity
+							held</label>
+					</div>
+					<div
+						class="col">
+						<input type="date" name="endDateOfActivityHeld"
+							value="<%= event.endDateOfActivityHeld %>"
+							class="form-control"
+							placeholder="End Date of Activity Held">
+					</div>
+				</div>
+
+				<!-- Time -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">Time</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" name="time" value="<%= event.time %>"
+							class="form-control"
+							placeholder="Time">
+					</div>
+				</div>
+
+				<!-- No. of Days -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">No.
+							of
+							Days</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" name="noOfDays" value="<%= event.noOfDays %>"
+							class="form-control"
+							placeholder="Number of Days">
+					</div>
+				</div>
+
+				<!-- Type of Activity -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">Type
+							of
+							Activity
+							(cultural/curricular/co-curricular)</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" name="typeOfActivity" value="<%= event.typeOfActivity %>"
+							class="form-control"
+							placeholder="Type of Activity">
+					</div>
+				</div>
+
+				<!-- Resource Persons -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5 d-flex justify-content-end align-items-center">
+						<label
+							class="form-label">Resource
+							Persons</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" name="resourcePerson" value="<%= event.resourcePerson %>"
+							class="form-control"
+							placeholder="Resource Person">
+					</div>
+				</div>
+
+				<!-- Professional Details of Resource Persons -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5   align-items-center">
+						<label
+							class="form-label">Professional
+							Details
+							of
+							Resource
+							Persons
+							with
+							Contact
+							Details
+							(email
+							&Phone)</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" name="detailsOfResourcePerson"
+							value="<%= event.detailsOfResourcePerson %>"
+							class="form-control"
+							placeholder="Professional Details of Resource Person">
+					</div>
+				</div>
+
+				<!-- Year / Class -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">Year
+							/
+							Class</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" name="yearClass" value="<%= event.yearClass %>"
+							class="form-control"
+							placeholder="Year / Class">
+					</div>
+				</div>
+
+				<!-- No. of students -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">No.
+							of
+							students</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" name="noOfStudents" value="<%= event.noOfStudents %>"
+							class="form-control"
+							placeholder="Number of students">
+					</div>
+				</div>
+
+				<!-- Activity In charge -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">Activity
+							In
+							charge</label>
+					</div>
+					<div
+						class="col">
+						<input type="text" name="activityIncharge"
+							value="<%= event.activityIncharge %>"
+							class="form-control"
+							placeholder="Activity In charge">
+					</div>
+				</div>
+
+				<!-- Photo -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">Current
+							Photo</label>
+					</div>
+					<div
+						class="col">
+						<!-- Display the name of the current photo -->
+						<input type="text" value="<%= event.photo %>"
+							class="form-control"
+							readonly>
+						<!-- Display the current photo -->
+						<img src="/image/<%= event.photo %>" alt="Current Photo"
+							style="max-width: 200px;">
+					</div>
+				</div>
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">Upload
+							New
+							Photo</label>
+					</div>
+					<div
+						class="col">
+						<!-- Allow users to upload a new photo -->
+						<input type="file" name="photo"
+							class="form-control">
+					</div>
+				</div>
+
+
+
+				<!-- Description of Activity in Brief -->
+				<div
+					class="mb-3 mt-3 row g-9 align-items-center">
+					<div
+						class="col col-lg-5">
+						<label
+							class="form-label">Description
+							of
+							Activity
+							in
+							Brief:</label>
+					</div>
+					<div
+						class="col">
+						<textarea rows="10" class="editor form-control"
+							name="descriptionOfActivity"><%= event.descriptionOfActivity %></textarea>
+					</div>
+				</div>
+
+
+				<!-- Submit Button -->
+				<div
+					class="mb-5 mt-3 align-items-center text-center">
+					<button type="submit"
+						class="btn btn-primary btn-lg">Update</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+	<!-- Add your script links here -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			// Client-side form submission handling using jQuery
+			$('#editEventForm').submit(function (event) {
+				event.preventDefault(); // Prevent the default form submission
+
+				// Serialize the form data
+				var formData = $(this).serialize();
+
+				// Submit the form data using AJAX
+				$.ajax({
+					url: $(this).attr('action'),
+					method: 'POST',
+					data: formData,
+					success: function (response) {
+						// Handle success
+						alert('Event updated successfully.');
+						window.location.href = '/admin-home/search-event';
+					},
+					error: function (xhr, status, error) {
+						// Handle error
+						console.error('Error updating event:', error);
+						alert('An error occurred while updating the event. Please try again.');
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>

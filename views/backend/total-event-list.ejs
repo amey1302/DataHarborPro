@@ -1,0 +1,131 @@
+<!-- total-count-details.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Harbor Pro</title>
+    <!-- Add your CSS links here -->
+    <style>
+        /* Add your custom styles here */
+        .category-table {
+            margin-top: 20px;
+        }
+        .category-name {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .logout-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: transparent;
+            margin-top: 10px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .logout-link:hover {
+            color: #007bff;
+            background-color: #fff;
+            border-color: #007bff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/admin-home"><img class="logo" src="/images/Data-harbor-pro-high-resolution-logo-black-transparent.png" alt="Logo" /></a>
+        <h1 class="company-name">Data Harbor Pro</h1>
+        <a class="logout-link" href="/logout">Logout</a>
+    </header>
+    <div class="main-container">
+        <div class="container">
+            <h1>Total Count Details</h1>
+            <% if (categories && categories.length > 0) { %>
+                <% categories.forEach(category => { %>
+                    <div class="category-table">
+                        <div class="category-name"><%= category.name %></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Activity Name</th>
+                                    <th>Start Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% category.activities.forEach(activity => { %>
+                                    <tr>
+                                        <td><%= activity.nameOfActivity %></td>
+                                        <td><%= activity.startDateOfActivityHeld %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>No categories found.</p>
+            <% } %>
+        </div>
+    </div>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+    <!-- Add your script links here -->
+</body>
+</html>

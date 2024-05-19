@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Harbor Pro</title>
+    <link href="/backend/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333; /* Main text color */
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto 0; /* Added margin-top */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .logout-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: transparent;
+            margin-top: 10px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .logout-link:hover {
+            color: #007bff;
+            background-color: #fff;
+            border-color: #007bff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff; /* Header color */
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #555; /* Label color */
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical; /* Allow vertical resizing of textareas */
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Button background color on hover */
+        }
+
+        /* Custom bullet styles */
+        ul.custom-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        ul.custom-list li:before {
+            content: "\2022"; /* Bullet symbol */
+            color: #007bff; /* Bullet color */
+            margin-right: 5px; /* Spacing between bullet and text */
+        }
+
+        /* Customizing scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Custom border style */
+        .bordered {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+   
+    <div class="container">
+        <h1>Host Event</h1>
+
+        <!-- Third-party cookie blocking notification -->
+        <div class="alert alert-warning" role="alert">
+            Third-party cookies will be blocked. Learn more in the Issues tab.
+        </div>
+
+        <form method="POST" action="/admin-home/host-event" enctype="multipart/form-data">
+            <!-- Your form inputs -->
+            <!-- Event Category -->
+            <div class="bordered">
+                <label  class="form-label">Event Category</label>
+                <select class="form-control"  name="eventCategory" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Technosinh">Technosinh</option>
+                    <option value="Dista">Dista</option>
+                    <option value="Guest Lecture">Guest Lecture</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Training">Training</option>
+                    <option value="Prayog">Prayog</option>
+                </select>
+            </div>
+
+            <!-- Event Name -->
+            <div class="bordered">
+                <label  class="form-label">Event Name</label>
+                <input type="text" class="form-control"  name="eventName" required>
+            </div>
+
+            <!-- Photo -->
+            <div class="bordered">
+                <div><label class="form-label">Photo</label></div>
+                <input type="file" name="flyer" class="form-control" required>
+            </div>
+
+            <!-- Event Date -->
+            <div class="bordered">
+                <label class="form-label">Event Date</label>
+                <input type="date" class="form-control" name="eventDate" required>
+                <!-- JavaScript to set min attribute to the next day's date -->
+            </div>
+
+
+            <!-- Location -->
+            <div class="bordered">
+                <label  class="form-label">Location</label>
+                <input type="text" class="form-control"  name="location" required>
+            </div>
+
+            <!-- Guidelines -->
+            <div class="bordered">
+                <label for="guidelines" class="form-label">Guidelines</label>
+                <div id="guidelinesEditor"></div>
+                <textarea id="guidelines" name="guideLines" style="display: none;" required></textarea>
+            </div>
+
+            <!-- Rules -->
+            <div class="bordered">
+                <label for="rules" class="form-label">Rules</label>
+                <div id="rulesEditor"></div>
+                <textarea id="rules" name="eventRules" style="display: none;" required></textarea>
+            </div>
+
+
+            <!-- Departmental Coordinators -->
+            <div class="bordered">
+                <label  class="form-label">Departmental Coordinators</label>
+                <input type="text" class="form-control" name="departmentalCoordinators" required>
+            </div>
+
+            <!-- Event Coordinators -->
+            <div class="bordered">
+                <label  class="form-label">Event Coordinators</label>
+                <input type="text" class="form-control"  name="eventCoordinators" required>
+            </div>
+
+            <!-- Venue -->
+            <div class="bordered">
+                <label  class="form-label">Venue</label>
+                <input type="text" class="form-control"  name="venue" required>
+            </div>
+
+            <!-- Registration Link -->
+            <div class="bordered">
+                <label  class="form-label">Registration Link</label>
+                <input type="text" class="form-control"  name="registrationLink" required>
+            </div>
+
+            <!-- Add more input fields for additional event details if needed -->
+            <button type="submit" class="btn btn-primary">Host Event</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#guidelinesEditor'), {
+                toolbar: ['bold', 'italic', 'bulletedList', 'numberedList']
+            })
+            .then(editor => {
+                editor.model.document.on('change:data', () => {
+                    document.querySelector('#guidelines').value = editor.getData();
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#rulesEditor'), {
+                toolbar: ['bold', 'italic', 'bulletedList', 'numberedList']
+            })
+            .then(editor => {
+                editor.model.document.on('change:data', () => {
+                    document.querySelector('#rules').value = editor.getData();
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+        const eventDateInput = document.querySelector('input[name="eventDate"]');
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1); // Set to the next day
+        const minDate = tomorrow.toISOString().split('T')[0];
+        eventDateInput.min = minDate;
+    });
+
+
+
+    </script>
+
+
+</body>
+
+</html>
