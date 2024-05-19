@@ -8,9 +8,7 @@ const router = express.Router();
 // Use body-parser middleware to parse request bodies
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-
-
-const uri = process.env.MONGODB_URI; // Assuming you have configured dotenv to load environment variables
+ // Assuming you have configured dotenv to load environment variables
 
 // Add more timeout to the MongoDB connection
 const options = {
@@ -22,7 +20,7 @@ const options = {
 };
 
 // Connect to MongoDB
-mongoose.connect(uri, options)
+mongoose.connect(process.env.MONGODB_URI, options)
   .then(() => console.log('MongoDB connected'))
   .catch(err => {
     console.error('MongoDB connection error:', err);
