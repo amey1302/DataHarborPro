@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 const AdminModel = require('../model/admin-model');
 
 const router = express.Router();
+
+// Configure body-parser middleware
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
